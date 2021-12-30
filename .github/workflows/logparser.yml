@@ -17,17 +17,6 @@ jobs:
     volumes: 
        - ./html:/opt/app/
 
-  spring:
-    config:
-      activate:
-        on-profile: prod
-  name: prod-YAML
-  environment: production
-  enabled: true
-  servers:
-      - www.store.com
-      - www.webstore.com
-
   python:
     runs-on: ubuntu-latest
     needs: [ubuntu]
