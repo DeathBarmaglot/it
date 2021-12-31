@@ -28,5 +28,7 @@ jobs:
       run: |
         pwd
         ls -la
+        cd PNP
+        ls -la
         pip install --upgrade pip 
         docker-compose up -d --force-recreate
