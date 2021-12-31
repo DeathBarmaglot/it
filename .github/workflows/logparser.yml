@@ -1,49 +1,32 @@
-name: Pavlo_Polyak
+name: pavlo_polyak_25021982
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
   pull_request:
-    branches: [ master ]
+    branches: 
+      - master
+  workflow_dispatch:
 
 jobs:
-  nginx:
-    build: nginx/
-    ports:
-        - "883:80"
-    depends_on:
-      python:
-        condition: service_healthy
-    volumes: 
-       - ./html:/opt/app/
-
+      
   python:
     runs-on: ubuntu-latest
-    needs: [ubuntu]
     strategy:
       matrix:
         python-version:
-        - 'pypy-3.7-v7.3.3' # Python 3.7 and PyPy 7.3.3
+        - 'pypy-3.6' # the latest available version of PyPy that supports Python 3.6
+#         - 'pypy-3.7' # the latest available version of PyPy that supports Python 3.7
+#         - 'pypy-3.7-v7.3.3' # Python 3.7 and PyPy 7.3.3
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: docker build
-      run: docker-compose up -d --force-recreate
-        
-    - name: Create ZIP artifacts
-      run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
-
-    - name: git push
+    - name: download
       run: |
-       git config --global user.email "poliyakpavlo@gmail.com"
-       git config --global user.name "PolyakPavlo" 
-       git add ${{ env.DEPLOY_PACKAGE_NAME }}
-       git commit -m "logparser"
-       git status
-       git push
-      
-#     - name: CleanUp
-#       run: |
-#         rm -r ~/.ssh
+        pwd
+        ls -la
+        pip install --upgrade pip 
+        docker-compose up -d --force-recreate
