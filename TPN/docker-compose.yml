@@ -23,7 +23,7 @@ services:
     ports:
         - "883:80"
     depends_on:
-      python:
+      tomcat:
         condition: service_healthy
     volumes: 
        - ./html:/opt/app/
