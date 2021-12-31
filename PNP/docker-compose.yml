@@ -1,36 +1,12 @@
-version: '3.1'
+version: "3"
 services:
-  postgres:
-    build: ./postgres
-    restart: always
-    logging:
-      options:
-      - max-size: 10m
-      - max-file: "3"
-      ports:
-      - '5432:5432'
-      volumes_from:
-      - db-data
-
-  db-data:  
-    image: cogniteev/echo
-    command: echo 'Data Container for PostgreSQL'
-    volumes:
-    - ./postgres-data:/var/lib/postgresql/data
-
-  tomcat:  
-  build: ./tomcat
-  ports:
-  - "8081:8080"
-  links:
-  - postgres
-  
-  nginx:
-    build: ./nginx
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=store
     ports:
-    - "883:80"
-    depends_on:
-      python:
-        condition: service_healthy
-    volumes: 
-    - ./html:/opt/app/
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
