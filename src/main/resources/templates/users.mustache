@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Users</title>
+</head>
+
+<body>
+
+<div class="d-flex justify-content-center">
+    <h2 class="text-center">List of users</h2>
+
+    <form action="/users/add" method="get">
+
+        <button type="submit" class="btn btn-success mx-4">Add</button>
+    </form>
+
+    <form action="/" method="get">
+
+        <button type="submit" class="btn btn-primary mx-4">Products</button>
+    </form>
+
+     <form action="/logout" method="get">
+
+        <input class="btn btn-danger mx-4" type="submit" value="LogOut"/>
+    </form>
+
+</div>
+<table class="table table-striped">
+    {{#users}}
+    <h3></h3>
+        
+        <tr>
+            <form action="/users/add" method="post">
+
+                <td><input style="border: none;" disabled="disabled" type="text" name="id" value="{{id}}"/></td>
+                <td><input style="border: none;" type="text" name="username" value="{{username}}"/></td>
+                <td><input style="border: none;" type="text" name="email" value="{{email}}"/></td>
+                <td><input style="border: none;" type="text" name="description" value="{{password}}"/></td>
+                <td><button type="submit" class="btn btn-outline-success float-sm-right">Save</button></td>
+            </form>
+            <td>
+                <form action="/users?id={{id}}" method="post">
+
+                <button type="submit" class="btn btn-outline-danger float-sm-right">Remove</button>
+                </form>
+            </td>
+            <td>
+            </td>
+        </tr>
+
+    {{/users}}
+
+</table>
+
+</body>
+</html>
