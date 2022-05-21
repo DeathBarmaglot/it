@@ -1,5 +1,12 @@
-version: '3.7'
+version: '2'
+volumes:
+  ubuntu:
 services:
   web:
     image: ubuntu
+    ports:
+      - 10.8.0.13.8080:80
+    restart: always
+    volumes:
+      - ubuntu:/var/www/html
     command: tail -F anything
