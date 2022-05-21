@@ -4,8 +4,6 @@ volumes:
 services:
   web:
     image: ubuntu
-    ports:
-      - 154.18.13.13:8080:80
     restart: always
     volumes:
       - ubuntu:/var/www/html
