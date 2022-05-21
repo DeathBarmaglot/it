@@ -7,18 +7,18 @@ on:
     branches: [ master ]
 
 jobs:
-
-  build:
-
+  vm:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag store:$(date +%s)
-      
-    - name: run the Docker image
-      run: docker ps
-      
-    - name: run the Docker image
-      run: docker store
+      - run: |
+          echo This job does not specify a container.
+          echo It runs directly on the virtual machine.
+        name: Run on VM
+  container:
+    runs-on: ubuntu-latest
+    container: node:10.16-jessie
+    steps:
+      - run: |
+          echo This job does specify a container.
+          echo It runs in the container instead of the VM.
+        name: Run in container
