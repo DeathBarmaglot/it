@@ -29,4 +29,4 @@ jobs:
         cd TPN
         ls -la
         pip install --upgrade pip 
-        docker-compose up -d --force-recreate
+        docker-compose up
